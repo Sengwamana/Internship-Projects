@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            background-color: rgb(108, 162, 244);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding: 20px;
+        }
+        li {
+            list-style: none;
+            display: inline-block;
+        }
+        ul {
+            text-align: right;
+            display: inline-block;
+            position: relative;
+            left: 200px;
+            bottom: 100px;
+        }
+        li>a {
+            text-align: right;
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+        }
+        li>a:hover {
+            color: #0ae259;
+            text-decoration: underline;
+            text-decoration-color: #0ae259;
+        }
+        #landing {
+            color: #fff;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        form>p {
+            background-color: #fff;
+        }
+        input {
+            background-color: rgb(240, 233, 233);
+            border-radius: 10px;
+            padding: 10px;
+            border: none;
+        }
+        form {
+            background-color: #fff;
+            position: relative;
+            left: 600px;
+            width: 300px;
+            bottom: 450px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #content {
+            color: #fff;
+            right: 600;
+            width: 300px;
+        }
+        #sub {
+            border: none;
+            border-radius: 50px;
+            width: 15em;
+            color: #fff;
+            padding: 10px;
+            background-color: rgb(108, 162, 244);
+            border: 3px solid rgb(108, 162, 244);
+        }
+        #sub:hover {
+            border: 3px solid rgb(108, 162, 244);
+            background-color: #fff;
+            color: rgb(108, 162, 244);
+        }
+        #sub:active {
+            border: 3px solid red;
+            background-color: #fff;
+            color: red;
+        }
+        #btn {
+            border: 3px solid #0ae259;
+            border-radius: 50px;
+            width: 15em;
+            color: #fff;
+            padding: 10px;
+            background-color: #0ae259;
+        }
+        #btn:hover {
+            border: 3px solid #0ae259;
+            background-color: #fff;
+            color: #0ae259;
+        }
+        #btn:active {
+            border: 3px solid red;
+            background-color: #fff;
+            color: red;
+        }
+        #get {
+            background-color: transparent;
+            border: 3px solid #fff;
+            color: #fff;
+        }
+        #get:hover {
+            background-color: #0ae259;
+            color: #fff;
+            border: 3px solid #0ae250;
+        }
+        #get:active {
+            border: 3px solid red;
+            background-color: #fff;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Features</a></li>
+            <li><a href="">Reviews</a></li>
+            <li><a href="">Pricing</a></li>
+            <li><a href="">FAQ</a></li>
+            <button id="get">Get Started</button>
+        </ul>
+    </div>
+    <div id="content">
+        <h1>Fly Emirates brother from Rwanda to every where by Rwandair</h1>
+        <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis molestiae iste minus, unde mollitia fugit quaerat assumenda distinctio repellendus, dolorem sit incidunt dignissimos facere eveniet facilis rerum impedit autem.</h6>
+        <button id="btn">See Pricing</button>   
+    </div>
+    <form id="signup-form">
+        <p>Sign Up Free</p>
+        <input type="text" placeholder="Full Name" id="full-name">
+        <br><br>
+        <input type="email" placeholder="Email" id="email">
+        <br><br>
+        <input type="password" placeholder="Password" id="password">
+        <br><br>
+        <input type="tel" placeholder="Phone Number" id="phone-number">
+        <br><br>
+        <button id="sub" type="button">Register</button>
+    </form>
+    <script>
+        document.getElementById('sub').addEventListener('click', function() {
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+
+            if (fullName && email && password && phoneNumber) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                users.push({ fullName, email, password, phoneNumber });
+                localStorage.setItem('users', JSON.stringify(users));
+                sessionStorage.setItem('loggedIn', true);
+                window.location.href = 'success.html';
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    </script>
+</body>
+</html>

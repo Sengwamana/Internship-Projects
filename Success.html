@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding: 20px;
+            background-color: rgb(108, 162, 244);
+            color: #fff;
+        }
+        #users-list {
+            margin: 20px 0;
+        }
+        .user-item {
+            background-color: #fff;
+            color: #000;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .user-item button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registered Users</h1>
+    <div id="users-list"></div>
+    <script>
+        if (!sessionStorage.getItem('loggedIn')) {
+            alert('You are not logged in!');
+            window.location.href = 'index.html';
+        } else {
+            const usersList = document.getElementById('users-list');
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            users.forEach((user, index) => {
+                const userItem = document.createElement('div');
+                userItem.className = 'user-item';
+                userItem.innerHTML = `
+                    <p>${user.fullName} - ${user.email} - ${user.phoneNumber}</p>
+                    <button onclick="editUser(${index})">Edit</button>
+                    <button onclick="deleteUser(${index})">Delete</button>
+                `;
+                usersList.appendChild(userItem);
+            });
+        }
+
+        function editUser(index) {
+            // Implement edit functionality
+            const users = JSON.parse(localStorage.getItem('users'));
+            const user = users[index];
+            const newFullName = prompt('Edit Full Name', user.fullName);
+            const newEmail = prompt('Edit Email', user.email);
+            const newPhoneNumber = prompt('Edit Phone Number', user.phoneNumber);
+
+            if (newFullName && newEmail && newPhoneNumber) {
+                users[index] = { ...user, fullName: newFullName, email: newEmail, phoneNumber: newPhoneNumber };
+                localStorage.setItem('users', JSON.stringify(users));
+                window.location.reload();
+            }
+        }
+
+        function deleteUser(index) {
+            const users = JSON.parse(localStorage.getItem('users'));
+            users.splice(index, 1);
+            localStorage.setItem('users', JSON.stringify(users));
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
